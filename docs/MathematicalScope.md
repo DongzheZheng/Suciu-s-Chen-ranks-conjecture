@@ -1,6 +1,6 @@
 # Mathematical Scope
 
-Version 1.0 verifies the effective Chen-rank formula for every finite complex affine hyperplane arrangement, and its improved range for central arrangements, relative to one explicit AFRS decomposition input. This document specifies the mathematical statement and its representation in Lean.
+Version 1.0 verifies the effective Chen-rank formula for every finite complex affine hyperplane arrangement, and its improved range for central arrangements, relative to one explicit AFRS decomposition input.
 
 ## Arrangements and Chen ranks
 
@@ -79,7 +79,7 @@ $$
 Here $W(V,K)$ is the Koszul module
 $\ker\delta_1/\operatorname{im}(\delta_2|_{\operatorname{Sym}(V)\otimes K})$, with its usual shifted grading. The project constructs this module, its grading, and the canonical maps. The finite family of factors is also constructed from separation.
 
-This input is the effective canonical decomposition supplied by [Aprodu–Farkas–Raicu–Suciu, *The effective Chen Ranks Conjecture*](https://arxiv.org/html/2512.10160v1), Theorem 1.1 and its proof, particularly equations (1.7) and (7.9). The cited proof establishes the canonical-map form used here. Version 1.0 accepts this statement as its sole literature input, represented by a theorem argument rather than an `axiom` declaration.
+This input is the effective canonical decomposition supplied by [Aprodu–Farkas–Raicu–Suciu, *The effective Chen Ranks Conjecture*](https://arxiv.org/html/2512.10160v1), Theorem 1.1 and its proof, particularly equations (1.7) and (7.9). The cited proof establishes the canonical-map form used here. Version 1.0 uses this statement as its sole literature input through the explicit parameter `hAFRS`.
 
 ## Internal deductions and stable ranges
 
@@ -103,7 +103,7 @@ $$
 q\ge\max\{2,N-2\}.
 $$
 
-The choice of a deconing hyperplane is internal. The public central theorem does not require that choice or a nonemptiness assumption. Empty arrangements and the cases outside the input's ambient-dimension range are handled by internal proofs.
+The proof chooses a deconing hyperplane internally whenever needed. Empty arrangements and the cases outside the input's ambient-dimension range are handled by internal proofs.
 
 ## Verified interface
 
@@ -114,8 +114,6 @@ $$
  h_m(\mathcal A)\binom{m+q-2}{q}.
 $$
 
-`chenRanks_affine` uses the affine range, and `chenRanks_central` uses the central range and the defining centrality condition. The supplied hypotheses contain no additional separation, finite-dimensionality, group-comparison, or component-counting assertions.
+`chenRanks_affine` uses the affine range, and `chenRanks_central` uses the central range and the defining centrality condition.
 
 The verification script runs the two mathematical audit modules and [`Verification.lean`](../Verification.lean). Together they display the full AFRS proposition, the group-rank and component-count conclusions, and 14 transitive axiom queries. The only foundational constants reported for the final declarations are `propext`, `Classical.choice`, and `Quot.sound`. These audits check the conditional deductions; the explicit `hAFRS` argument remains the single external mathematical input.
-
-The associated [manuscript](https://doi.org/10.13140/RG.2.2.31932.40329) is available separately. The repository contains the formalization and its verification records.

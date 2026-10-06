@@ -51,11 +51,11 @@ Source integrity can also be checked without invoking Lean:
 python3 scripts/verify.py --check-sources
 ```
 
-The final declarations have been checked by the Lean kernel. Their transitive axiom audits report only the standard foundational constants `propext`, `Classical.choice`, and `Quot.sound`. The AFRS input is a hypothesis visible in the theorem types; it is not added as a project axiom. There are no proof holes or additional project mathematical axioms.
+The final declarations have been checked by the Lean kernel. Their transitive axiom audits report only the standard foundational constants `propext`, `Classical.choice`, and `Quot.sound`. The AFRS decomposition appears as the explicit parameter `hAFRS` in the theorem types.
 
 The [verification certificate](verification/Certificate.json) records the input and the checked result, and the [source manifest](verification/SourceManifest.json) identifies the release sources by SHA-256.
 
 ## References
 
-- [Associated manuscript](https://doi.org/10.13140/RG.2.2.31932.40329). The manuscript is linked rather than bundled with this repository.
+- [Associated manuscript](https://doi.org/10.13140/RG.2.2.31932.40329).
 - M. Aprodu, G. Farkas, C. Raicu, and A. I. Suciu, [*The effective Chen Ranks Conjecture*](https://arxiv.org/html/2512.10160v1), Theorem 1.1 and its proof, including equations (1.7) and (7.9). These establish the effective canonical decomposition used as the single external input.

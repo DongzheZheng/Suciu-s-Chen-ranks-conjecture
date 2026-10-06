@@ -5,7 +5,7 @@
   "leanVersion": "Lean (version 4.29.0, x86_64-unknown-linux-gnu, commit 98dc76e3c0a9b856c9b98726b713fb04fab16740, Release)",
   "mathlibRevision": "8a178386ffc0f5fef0b77738bb5449d50efeea95",
   "sourceManifest": "verification/SourceManifest.json",
-  "sourceManifestSha256": "5b024d0754a32ba46ee8590db3aea72c8c8133e09eef1428509b78c4d1346395",
+  "sourceManifestSha256": "7021b427b0e7ecba71d0a796547ffeabdf4f351ea85c5c63979d493159ba625f",
   "leanModuleCount": 700,
   "compiledModuleSha256": {
     "ChenRanks.lean": "1cc079cc4bc0b8506f1ff66730e0e36221d5c386eef4d2ec9d6377d2d9d1889e",
