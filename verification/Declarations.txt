@@ -1,0 +1,180 @@
+=== checks/ActualChenRanksAFRSVersionOneAudit.lean ===
+
+def ChenRanks.Koszul.AFRSEffectiveCanonicalDecomposition.{u} : Prop :=
+∀ (E : Type u) [inst : AddCommGroup.{u} E] [inst_1 : _root_.Module.{0, u} Complex E]
+  [inst_2 : FiniteDimensional.{0, u} Complex E]
+  (I : Submodule.{0, u} Complex ↥(ExteriorAlgebra.exteriorPower.{0, u} Complex 2 E)),
+  LE.le.{0} 3 (Module.finrank.{0, u} Complex E) →
+    (∀ (P : Submodule.{0, u} Complex E),
+        ChenRanks.IsMaximalIsotropic.{0, u, u}
+            (ChenRanks.relationWedge.{0, u, u} (ChenRanks.Resonance.cupQuotient.{0, u} I)) P →
+          LE.le.{0} 2 (Module.finrank.{0, u} Complex ↥P) →
+            Eq.{u + 1}
+              (ChenRanks.mixedExterior.{0, u} P ⊓ LinearMap.ker.{0, 0, u, u} (ChenRanks.Resonance.cupQuotient.{0, u} I))
+              (ChenRanks.pureExterior.{0, u} P)) →
+      ∀ (τ : Type) [inst_3 : Fintype.{0} τ] (b : Module.Basis.{0, 0, u} τ Complex (Module.Dual.{0, u} Complex E))
+        (r : Nat),
+        LE.le.{0} (HSub.hSub.{0, 0, 0} (Module.finrank.{0, u} Complex E) 3) r →
+          Function.Bijective.{u + 1, u + 1}
+            ⇑(ChenRanks.Koszul.originalCanonicalFamilyHomogeneousMap.{0, u, 0} Complex E I b r)
+@ChenRanks.AffineArrangement.actualRationalChenRanks_paperRange_versionOne.{u_1} : ∀ {d : Nat} {ι : Type u_1}
+  [inst : Fintype.{u_1} ι] (A : ChenRanks.AffineArrangement.{u_1} d ι),
+  ChenRanks.Koszul.AFRSEffectiveCanonicalDecomposition.{u_1} →
+    ∀ (base : ChenRanks.AffineArrangement.Complement.{u_1} A) (q : Nat),
+      LE.le.{0} (Max.max.{0} 2 (HSub.hSub.{0, 0, 0} (Fintype.card.{u_1} ι) 1)) q →
+        Eq.{2} (ChenRanks.AffineArrangement.chenRank.{u_1} A base (HSub.hSub.{0, 0, 0} q 1))
+          ↑(ChenRanks.AffineArrangement.actualResonanceChenRankExpression.{u_1} A q)
+@ChenRanks.AffineArrangement.actualCentralRationalChenRanks_paperRange_versionOne.{u_1} : ∀ {d : Nat} {ι : Type u_1}
+  [inst : Fintype.{u_1} ι] (A : ChenRanks.AffineArrangement.{u_1} d ι),
+  ChenRanks.Koszul.AFRSEffectiveCanonicalDecomposition.{u_1} →
+    (∀ (H : ι), Eq.{1} (ChenRanks.AffineArrangement.offset.{u_1} A H) 0) →
+      ∀ (base : ChenRanks.AffineArrangement.Complement.{u_1} A) (q : Nat),
+        LE.le.{0} (Max.max.{0} 2 (HSub.hSub.{0, 0, 0} (Fintype.card.{u_1} ι) 2)) q →
+          Eq.{2} (ChenRanks.AffineArrangement.chenRank.{u_1} A base (HSub.hSub.{0, 0, 0} q 1))
+            ↑(ChenRanks.AffineArrangement.actualResonanceChenRankExpression.{u_1} A q)
+def ChenRanks.rationalChenRank.{u_1} : (G : Type u_1) → [Group.{u_1} G] → Nat → Cardinal.{u_1} :=
+fun G [Group.{u_1} G] k => Module.rank.{0, u_1} Rat (ChenRanks.rationalChenSpace.{u_1} G k)
+def ChenRanks.finiteChenRank.{u_1} : (G : Type u_1) → [Group.{u_1} G] → Nat → Nat :=
+fun G [Group.{u_1} G] k => Module.finrank.{0, u_1} Rat (ChenRanks.rationalChenSpace.{u_1} G k)
+def ChenRanks.AffineArrangement.chenRank.{u_1} : {d : Nat} →
+  {ι : Type u_1} →
+    [inst : Fintype.{u_1} ι] →
+      (A : ChenRanks.AffineArrangement.{u_1} d ι) →
+        ChenRanks.AffineArrangement.Complement.{u_1} A → Nat → Cardinal.{0} :=
+fun {d} {ι} [Fintype.{u_1} ι] A x k =>
+  ChenRanks.rationalChenRank.{0} (ChenRanks.AffineArrangement.complementGroup.{u_1} A x) k
+def ChenRanks.AffineArrangement.actualResonanceChenRankExpression.{u_1} : {d : Nat} →
+  {ι : Type u_1} → [inst : Fintype.{u_1} ι] → ChenRanks.AffineArrangement.{u_1} d ι → Nat → Nat :=
+fun {d} {ι} [Fintype.{u_1} ι] A q =>
+  HMul.hMul.{0, 0, 0} (HSub.hSub.{0, 0, 0} q 1)
+    (∑ m ∈ Finset.Icc.{0} 2 (Fintype.card.{u_1} ι),
+      HMul.hMul.{0, 0, 0} (ChenRanks.AffineArrangement.singularProjectiveComponentDimensionCount.{u_1} A m)
+        (Nat.choose (HSub.hSub.{0, 0, 0} (HAdd.hAdd.{0, 0, 0} m q) 2) q))
+def ChenRanks.AffineArrangement.singularProjectiveComponentDimensionCount.{u_1} : {d : Nat} →
+  {ι : Type u_1} → [inst : Fintype.{u_1} ι] → ChenRanks.AffineArrangement.{u_1} d ι → Nat → Nat :=
+fun {d} {ι} [Fintype.{u_1} ι] A m =>
+  ChenRanks.Koszul.actualProjectiveResonanceComponentDimensionCount.{0} Complex
+    (↑(ChenRanks.AffineArrangement.singularH1.{u_1} A)) (ChenRanks.AffineArrangement.singularDualBasis.{u_1} A)
+    (ChenRanks.AffineArrangement.singularCupKernel.{u_1} A) m
+ChenRanks.finiteChenRank_eq_rationalChenRank.{u_1} : ∀ (G : Type u_1) [inst : Group.{u_1} G] (k : Nat)
+  [FiniteDimensional.{0, u_1} Rat (ChenRanks.rationalChenSpace.{u_1} G k)],
+  Eq.{u_1 + 2} (↑(ChenRanks.finiteChenRank.{u_1} G k)) (ChenRanks.rationalChenRank.{u_1} G k)
+@ChenRanks.AffineArrangement.actualRationalChenPiece_finiteDimensional.{u_1} : ∀ {d : Nat} {ι : Type u_1}
+  [inst : Fintype.{u_1} ι] (A : ChenRanks.AffineArrangement.{u_1} d ι)
+  (base : ChenRanks.AffineArrangement.Complement.{u_1} A) (n : Nat),
+  FiniteDimensional.{0, 0} Rat
+    (ChenRanks.rationalChenSpace.{0} (FundamentalGroup.{0} (ChenRanks.AffineArrangement.Complement.{u_1} A) base) n)
+@ChenRanks.AffineArrangement.actualFiniteChenRank_eq_originalKoszulDegree.{u_1} : ∀ {d : Nat} {ι : Type u_1}
+  [inst : Fintype.{u_1} ι] (A : ChenRanks.AffineArrangement.{u_1} d ι)
+  (base : ChenRanks.AffineArrangement.Complement.{u_1} A) (r : Nat),
+  Eq.{1}
+    (ChenRanks.finiteChenRank.{0} (FundamentalGroup.{0} (ChenRanks.AffineArrangement.Complement.{u_1} A) base)
+      (HAdd.hAdd.{0, 0, 0} r 1))
+    (Module.finrank.{0, u_1} Complex
+      (ChenRanks.Koszul.homogeneousModule.{0, u_1, 0} Complex (Module.Dual.{0, u_1} Complex (ι → Complex))
+        (Module.Basis.dualBasis.{0, u_1, 0} (ChenRanks.AffineArrangement.actualLogHolonomyLabelBasis.{u_1} A))
+        (ChenRanks.Koszul.exteriorAnnihilator.{0, u_1} Complex (ι → Complex) 2
+          (ChenRanks.AffineArrangement.rationalQuadraticKernel.{u_1} A))
+        r))
+@ChenRanks.AffineArrangement.singularProjectiveComponentDimensionCount_eq_rational.{u_1} : ∀ {d : Nat} {ι : Type u_1}
+  [inst : Fintype.{u_1} ι] (A : ChenRanks.AffineArrangement.{u_1} d ι) (m : Nat),
+  Eq.{1} (ChenRanks.AffineArrangement.singularProjectiveComponentDimensionCount.{u_1} A m)
+    (ChenRanks.AffineArrangement.rationalMaximalIsotropicDimensionCount.{u_1} A m)
+@ChenRanks.AffineArrangement.actualCentralDecone_resonanceChenRankExpression.{u_1} : ∀ {d : Nat} {ι : Type u_1}
+  [inst : Fintype.{u_1} ι] (A : ChenRanks.AffineArrangement.{u_1} d ι)
+  (hcentral : ∀ (H : ι), Eq.{1} (ChenRanks.AffineArrangement.offset.{u_1} A H) 0) (i₀ : ι) (q : Nat),
+  Eq.{1}
+    (ChenRanks.AffineArrangement.actualResonanceChenRankExpression.{u_1}
+      (ChenRanks.AffineArrangement.actualCentralDecone.{u_1} A hcentral i₀) q)
+    (ChenRanks.AffineArrangement.actualResonanceChenRankExpression.{u_1} A q)
+'ChenRanks.Koszul.AFRSEffectiveCanonicalDecomposition' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+'ChenRanks.AffineArrangement.actualRationalChenRanks_paperRange_versionOne' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+'ChenRanks.AffineArrangement.actualCentralRationalChenRanks_paperRange_versionOne' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+'ChenRanks.finiteChenRank_eq_rationalChenRank' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+'ChenRanks.AffineArrangement.actualRationalChenPiece_finiteDimensional' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+'ChenRanks.AffineArrangement.actualFiniteChenRank_eq_originalKoszulDegree' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+'ChenRanks.AffineArrangement.singularProjectiveComponentDimensionCount_eq_rational' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+'ChenRanks.AffineArrangement.actualResonanceChenRankExpression_eq_range' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+'ChenRanks.AffineArrangement.actualCentralDecone_resonanceChenRankExpression' depends on axioms: [propext,
+ Classical.choice.{u},
+ Quot.sound.{u}]
+
+
+=== checks/ActualCentralChenRanksAFRSVersionOneAudit.lean ===
+
+@ChenRanks.AffineArrangement.actualCentralDecone_resonanceChenRankExpression.{u_1} : ∀ {d : Nat} {ι : Type u_1}
+  [inst : Fintype.{u_1} ι] (A : ChenRanks.AffineArrangement.{u_1} d ι)
+  (hcentral : ∀ (H : ι), Eq.{1} (ChenRanks.AffineArrangement.offset.{u_1} A H) 0) (i₀ : ι) (q : Nat),
+  Eq.{1}
+    (ChenRanks.AffineArrangement.actualResonanceChenRankExpression.{u_1}
+      (ChenRanks.AffineArrangement.actualCentralDecone.{u_1} A hcentral i₀) q)
+    (ChenRanks.AffineArrangement.actualResonanceChenRankExpression.{u_1} A q)
+@ChenRanks.AffineArrangement.actualCentralRationalChenRanks_paperRange_versionOne.{u_1} : ∀ {d : Nat} {ι : Type u_1}
+  [inst : Fintype.{u_1} ι] (A : ChenRanks.AffineArrangement.{u_1} d ι),
+  ChenRanks.Koszul.AFRSEffectiveCanonicalDecomposition.{u_1} →
+    (∀ (H : ι), Eq.{1} (ChenRanks.AffineArrangement.offset.{u_1} A H) 0) →
+      ∀ (base : ChenRanks.AffineArrangement.Complement.{u_1} A) (q : Nat),
+        LE.le.{0} (Max.max.{0} 2 (HSub.hSub.{0, 0, 0} (Fintype.card.{u_1} ι) 2)) q →
+          Eq.{2} (ChenRanks.AffineArrangement.chenRank.{u_1} A base (HSub.hSub.{0, 0, 0} q 1))
+            ↑(ChenRanks.AffineArrangement.actualResonanceChenRankExpression.{u_1} A q)
+@ChenRanks.AffineArrangement.actualCentralRationalChenRanks_paperSum_versionOne.{u_1} : ∀ {d : Nat} {ι : Type u_1}
+  [inst : Fintype.{u_1} ι] (A : ChenRanks.AffineArrangement.{u_1} d ι),
+  ChenRanks.Koszul.AFRSEffectiveCanonicalDecomposition.{u_1} →
+    (∀ (H : ι), Eq.{1} (ChenRanks.AffineArrangement.offset.{u_1} A H) 0) →
+      ∀ (base : ChenRanks.AffineArrangement.Complement.{u_1} A) (q : Nat),
+        LE.le.{0} (Max.max.{0} 2 (HSub.hSub.{0, 0, 0} (Fintype.card.{u_1} ι) 2)) q →
+          Eq.{2} (ChenRanks.AffineArrangement.chenRank.{u_1} A base (HSub.hSub.{0, 0, 0} q 1))
+            ↑(HMul.hMul.{0, 0, 0} (HSub.hSub.{0, 0, 0} q 1)
+                (∑ m ∈ Finset.Icc.{0} 2 (Fintype.card.{u_1} ι),
+                  HMul.hMul.{0, 0, 0} (ChenRanks.AffineArrangement.singularProjectiveComponentDimensionCount.{u_1} A m)
+                    (Nat.choose (HSub.hSub.{0, 0, 0} (HAdd.hAdd.{0, 0, 0} m q) 2) q)))
+'ChenRanks.AffineArrangement.actualCentralDecone_resonanceChenRankExpression' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ChenRanks.AffineArrangement.actualCentralRationalChenRanks_paperRange_versionOne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ChenRanks.AffineArrangement.actualCentralRationalChenRanks_paperSum_versionOne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+
+=== Verification.lean ===
+
+@ChenRanks.AffineArrangement.chenRanks_affine.{u_1} : ∀ {d : Nat} {ι : Type u_1} [inst : Fintype.{u_1} ι]
+  (A : ChenRanks.AffineArrangement.{u_1} d ι),
+  ChenRanks.Koszul.AFRSEffectiveCanonicalDecomposition.{u_1} →
+    ∀ (base : ChenRanks.AffineArrangement.Complement.{u_1} A) (q : Nat),
+      LE.le.{0} (Max.max.{0} 2 (HSub.hSub.{0, 0, 0} (Fintype.card.{u_1} ι) 1)) q →
+        Eq.{2} (ChenRanks.AffineArrangement.chenRank.{u_1} A base (HSub.hSub.{0, 0, 0} q 1))
+          ↑(HMul.hMul.{0, 0, 0} (HSub.hSub.{0, 0, 0} q 1)
+              (∑ m ∈ Finset.Icc.{0} 2 (Fintype.card.{u_1} ι),
+                HMul.hMul.{0, 0, 0} (ChenRanks.AffineArrangement.singularProjectiveComponentDimensionCount.{u_1} A m)
+                  (Nat.choose (HSub.hSub.{0, 0, 0} (HAdd.hAdd.{0, 0, 0} m q) 2) q)))
+@ChenRanks.AffineArrangement.chenRanks_central.{u_1} : ∀ {d : Nat} {ι : Type u_1} [inst : Fintype.{u_1} ι]
+  (A : ChenRanks.AffineArrangement.{u_1} d ι),
+  ChenRanks.Koszul.AFRSEffectiveCanonicalDecomposition.{u_1} →
+    (∀ (H : ι), Eq.{1} (ChenRanks.AffineArrangement.offset.{u_1} A H) 0) →
+      ∀ (base : ChenRanks.AffineArrangement.Complement.{u_1} A) (q : Nat),
+        LE.le.{0} (Max.max.{0} 2 (HSub.hSub.{0, 0, 0} (Fintype.card.{u_1} ι) 2)) q →
+          Eq.{2} (ChenRanks.AffineArrangement.chenRank.{u_1} A base (HSub.hSub.{0, 0, 0} q 1))
+            ↑(HMul.hMul.{0, 0, 0} (HSub.hSub.{0, 0, 0} q 1)
+                (∑ m ∈ Finset.Icc.{0} 2 (Fintype.card.{u_1} ι),
+                  HMul.hMul.{0, 0, 0} (ChenRanks.AffineArrangement.singularProjectiveComponentDimensionCount.{u_1} A m)
+                    (Nat.choose (HSub.hSub.{0, 0, 0} (HAdd.hAdd.{0, 0, 0} m q) 2) q)))
+'ChenRanks.AffineArrangement.chenRanks_affine' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+'ChenRanks.AffineArrangement.chenRanks_central' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
