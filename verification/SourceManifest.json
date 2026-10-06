@@ -702,7 +702,7 @@
     "ChenRanks/VerticalProperFunctions.lean": "5c358d6a97b2ff742bd41575586ebf2ee6a4bb16384ca97a35f706e02e628e09",
     "ChenRanks/VerticalRegularSections.lean": "e89020389edea7902d1fe6958a9e190b3bb8d79496eb073df327eb1412661529",
     "ChenRanks.lean": "af25d3d06507eb9be0e9575f9dc758196a152d658b757427ece1c63697336b2a",
-    "README.md": "ed92aecb49b9508a1e1ce2ae36305a68f861e7a4f2961eaf5afe99fc32a486c0",
+    "README.md": "b887e2cbe3d48007731a926d981bd72f48d2b84588c92d94870971ac38b4da11",
     "Verification.lean": "fbcc7648074cd8e11d68109a6ad6a8b80c8f1b4b79c518391583df70ed1d39a0",
     "checks/ActualCentralChenRanksAFRSVersionOneAudit.lean": "82ef0e2c909859b2c70514bf21d62c5e94ce155a27e53468587016920eeac7cb",
     "checks/ActualChenRanksAFRSVersionOneAudit.lean": "25fc4040190d104d62c04b87748dc2a871c262690d915b4bb3d5f65fac859922",

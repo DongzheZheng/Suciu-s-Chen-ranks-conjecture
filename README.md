@@ -1,8 +1,17 @@
-# Chen Ranks and Resonance: Lean Verification
+# Suciu’s Chen Ranks Conjecture: A Verified Stable Rational Formula for All Complex Hyperplane Arrangements
 
-A Lean 4 formalization of the effective Chen-rank formula for finite complex hyperplane arrangements. Version 1.0 verifies the passage from geometric separation to the rational Chen ranks of the complement's fundamental group, with explicit stable ranges.
+This project verifies Suciu’s stable rational Chen-rank formula for every finite complex hyperplane arrangement in Lean 4. It proves geometric separation of resonance components and derives an effective formula for the Chen ranks of the complement’s fundamental group, with explicit degree bounds for affine and central arrangements.
 
 **The sole external mathematical input is the effective canonical Koszul decomposition of Aprodu–Farkas–Raicu–Suciu (AFRS).** It is retained as the explicit theorem parameter `hAFRS`. The arrangement separation theorem and all group, cohomology, finiteness, component-counting, and deconing comparisons are proved within the formalization.
+
+## The problem and its history
+
+Chen ranks are the rational ranks of the lower-central quotients of a group’s maximal metabelian quotient. For a complex hyperplane arrangement, the conjectured formula computes these ranks in sufficiently high degrees from the dimensions and number of components of the first resonance variety, which is defined by the cup product on degree-one cohomology.
+
+- **2001.** Suciu formulated the resonance formula in [Conjecture 8.4 of *Fundamental groups of line arrangements: Enumerative aspects*](https://arxiv.org/pdf/math/0010105). The stable rational formula is the statement verified here.
+- **2006.** [Schenck–Suciu](https://arxiv.org/abs/math/0502438) connected Chen ranks to the linear strand of the Orlik–Solomon algebra, proved the formula for graphic arrangements, and obtained a general lower bound.
+- **2015 and 2023.** [Cohen–Schenck](https://arxiv.org/abs/1312.3652v3) proposed a general proof in 2015 and revised the argument in 2023. AFRS later identified a remaining gap for components supported on proper subarrangements; see [Remark 9.6 of their effective theory](https://arxiv.org/html/2512.10160v1#S9.SS5).
+- **2024–2025.** AFRS developed a [scheme-theoretic framework](https://arxiv.org/abs/2303.07855) and an [effective Koszul decomposition](https://arxiv.org/html/2512.10160v1), with a separation condition on resonance components. The geometric separation theorem verified in this project establishes that condition for every finite complex hyperplane arrangement, yielding the formula and the explicit ranges below.
 
 ## Main results
 
